@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Activity, CheckCircle, XCircle, Clock, AlertCircle } from 'lucide-react';
 
 export interface LogEntry {
@@ -29,11 +28,12 @@ const StatusIcon = ({ status }: { status: LogEntry['status'] }) => {
 };
 
 export function StatusLog({ logs }: StatusLogProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    // Auto-scroll to bottom when new logs are added
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
   }, [logs]);
 
@@ -46,7 +46,10 @@ export function StatusLog({ logs }: StatusLogProps) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-48 rounded-lg border border-border bg-muted/30" ref={scrollRef}>
+        <div 
+          ref={containerRef}
+          className="h-48 rounded-lg border border-border bg-muted/30 overflow-y-auto"
+        >
           <div className="p-3 space-y-2">
             {logs.length === 0 ? (
               <p className="text-center text-muted-foreground text-sm py-8">
@@ -73,7 +76,7 @@ export function StatusLog({ logs }: StatusLogProps) {
               ))
             )}
           </div>
-        </ScrollArea>
+        </div>
       </CardContent>
     </Card>
   );

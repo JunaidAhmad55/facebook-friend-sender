@@ -44,7 +44,7 @@ const FacebookContext = createContext<FacebookContextType | undefined>(undefined
 
 declare global {
   interface Window {
-    FB: any;
+    FB: any & { _initialized?: boolean };
     fbAsyncInit: () => void;
   }
 }
@@ -60,6 +60,12 @@ export function FacebookProvider({ children }: { children: ReactNode }) {
   const connectFacebook = useCallback(() => {
     if (!window.FB) {
       console.error('Facebook SDK not loaded');
+      return;
+    }
+
+    if (!window.FB._initialized) {
+      console.error('Facebook SDK not initialized. Please add your Facebook App ID.');
+      alert('Facebook SDK not initialized. Please configure your Facebook App ID in the environment variables (VITE_FACEBOOK_APP_ID).');
       return;
     }
 
