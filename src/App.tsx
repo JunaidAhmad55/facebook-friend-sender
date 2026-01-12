@@ -18,11 +18,13 @@ function FacebookSDKLoader() {
     // Load Facebook SDK
     window.fbAsyncInit = function() {
       window.FB.init({
-        appId: '', // User will need to add their Facebook App ID here
+        appId: import.meta.env.VITE_FACEBOOK_APP_ID || '',
         cookie: true,
         xfbml: true,
         version: 'v18.0'
       });
+      // Mark SDK as initialized
+      window.FB._initialized = true;
     };
 
     // Load the SDK asynchronously
