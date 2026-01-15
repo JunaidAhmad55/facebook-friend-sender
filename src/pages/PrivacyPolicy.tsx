@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
       <main className="container py-10">
         <div className="mx-auto max-w-3xl space-y-8">
           <header className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight">Privacy Policy</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Privacy Policy </h1>
             <p className="text-muted-foreground">Last updated: January 15, 2026</p>
           </header>
 
