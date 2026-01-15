@@ -99,7 +99,7 @@ export default function Dashboard() {
           {/* Header Section */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+              <h1 className="text-3xl font-bold tracking-tight">Dashboard here</h1>
               <p className="text-muted-foreground mt-1">
                 Manage your Facebook broadcasts from one place
               </p>
