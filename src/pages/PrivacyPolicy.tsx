@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
           <section className="space-y-3">
             <h2 className="text-xl font-semibold">Contact</h2>
             <p className="text-muted-foreground">
-              For privacy questions, contact us at <span className="font-medium">support@example.com</span>.
+              For privacy questions, contact us at <span className="font-medium">junaid.ahmad@kalpayfinancials.com</span>.
             </p>
           </section>
         </div>
