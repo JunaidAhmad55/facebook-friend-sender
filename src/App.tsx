@@ -8,6 +8,7 @@ import { FacebookProvider } from "@/contexts/FacebookContext";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import { useEffect } from "react";
 
 const queryClient = new QueryClient();
@@ -17,14 +18,21 @@ function FacebookSDKLoader() {
   useEffect(() => {
     // Load Facebook SDK
     window.fbAsyncInit = function() {
+      const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
+      if (!appId) {
+        console.error('Missing VITE_FACEBOOK_APP_ID. Facebook SDK not initialized.');
+        return;
+      }
+
       window.FB.init({
-        appId: import.meta.env.VITE_FACEBOOK_APP_ID || '',
+        appId,
         cookie: true,
         xfbml: true,
-        version: 'v18.0'
+        version: 'v18.0',
       });
       // Mark SDK as initialized
       window.FB._initialized = true;
+      window.dispatchEvent(new Event('facebook-sdk-ready'));
     };
 
     // Load the SDK asynchronously
@@ -53,6 +61,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
